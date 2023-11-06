@@ -2,8 +2,13 @@
 import { useState } from 'react'
 import styles from './page.module.css'
 import Button from '@/components/Button'
+import markets from '@/ao-bin-dumps/markets'
+import { MarketItem } from '@/types/MarketItem'
 
 const Home = () => {
+  // const items = ['T1_BAG', 'T2_BAG', 'T3_BAG', 'T4_BAG', 'T5_BAG']
+  const items = ['T5_BAG']
+
   const [responseFeedback, setResponseFeedback] = useState(
     'Waiting for "Make API call" button to be pressed.'
   )
@@ -11,10 +16,11 @@ const Home = () => {
   const callAPI = async () => {
     const APIHostURL = 'https://west.albion-online-data.com'
     const pricesEndpoint = '/api/v2/stats/Prices/'
-    const itemList = 'T4_BAG%2CT5_BAG'
+    const itemList = items.join('%2C')
     const format = '.json'
-    const locations = '?locations=' + 'Caerleon%2CBridgewatch'
-    const qualities = '&qualities=' + '5'
+    const locations = '?locations=' + 'BlackMarket' //+ markets.join('%2C')
+    // 0 = all the qualities, 1 to 5 specific quality
+    const qualities = '&qualities=' + '0'
     const APIEndpoint = pricesEndpoint + itemList + format + locations + qualities
     const requestInfo = APIHostURL + APIEndpoint
 
@@ -56,10 +62,17 @@ const Home = () => {
       }
 
       const res = await fetch(requestInfo)
-      const data = await res.json()
+      const data: MarketItem[] = await res.json()
+      const filteredData = data.filter(
+        (item) =>
+          item.buy_price_max !== 0 &&
+          item.buy_price_min !== 0 &&
+          item.sell_price_max !== 0 &&
+          item.sell_price_min !== 0
+      )
 
       setResponseFeedback('Data successfully fetched.')
-      console.log(data)
+      console.log(filteredData)
     } catch (err) {
       setResponseFeedback('Error: ' + String(err))
       console.log(err)
