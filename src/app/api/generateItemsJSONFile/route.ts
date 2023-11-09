@@ -20,8 +20,12 @@ const transformData = (inputData: InputData[]): string => {
   const transformedData = inputData.map((item) => {
     const { LocalizedNames, LocalizedDescriptions, Index, UniqueName } = item
     return {
-      name: LocalizedNames['EN-US'],
-      description: LocalizedDescriptions['EN-US'],
+      name: LocalizedNames ? LocalizedNames['EN-US'] : UniqueName,
+      description: LocalizedDescriptions
+        ? LocalizedDescriptions['EN-US']
+        : LocalizedNames
+        ? LocalizedNames['EN-US']
+        : UniqueName,
       index: Index,
       uniqueName: UniqueName,
     }
@@ -32,7 +36,7 @@ const transformData = (inputData: InputData[]): string => {
 
 export async function GET(_request: Request) {
   try {
-    const file = await fs.readFile(process.cwd() + '/src/data/items_raw_test.json', 'utf8')
+    const file = await fs.readFile(process.cwd() + '/src/data/items_raw.json', 'utf8')
     const inputData = JSON.parse(file)
 
     // const inputData = itemsRaw as InputData[]
