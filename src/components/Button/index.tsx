@@ -2,7 +2,7 @@ import styles from './styles.module.css'
 
 interface ButtonProps {
   children: string
-  onClick: () => Promise<void>
+  onClick: () => any
 }
 
 const Button: React.FC<ButtonProps> = ({ children, onClick }) => {
