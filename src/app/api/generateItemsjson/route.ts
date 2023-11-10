@@ -43,12 +43,12 @@ export async function GET(_request: Request) {
     const transformedData = transformData(inputData)
 
     // Define the file path where you want to save the JSON file
-    const filePath = './public/items.json'
+    const filePath = './src/data/items.json'
 
     // Write the JSON content to the file
     await fs.writeFile(filePath, transformedData)
 
-    return new Response('The JSON file has been generated at ./public/items.json')
+    return new Response('The JSON file has been generated at ./src/data/items.json')
   } catch (error) {
     console.error(error)
     return new Response('Error: ' + String(error))

@@ -25,10 +25,10 @@ const Home = () => {
   // TODO: You can sell your higher quality items to a lower quality buy order, but not the other way around.
   /* Items Categories:
   Accessories:
-  Bag*, Cape*
+  Bag, Cape
 
   Armor:
-  Cloth Armor*, Cloth Helmet*, Cloth Shoes*,
+  Cloth Armor, Cloth Helmet, Cloth Shoes,
   Leather Armor, Leather Helmet, Leather Shoes,
   Plate Armor, Plate Helmet, Plate Shoes
 
