@@ -19,3 +19,16 @@
 .marginBottom {
   margin-bottom: 2rem;
 }
+
+.container {
+  margin: 2rem auto;
+}
+
+.container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.container li {
+  margin-bottom: 1rem;
+}

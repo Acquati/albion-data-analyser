@@ -6,30 +6,30 @@ import markets from '@/data/markets'
 import callPricesAPI from '@/utils/getPrices'
 import getUniqueNames from '@/utils/getUniqueNames'
 
-const items = [
-  {
-    name: 'Hideout Construction Kit',
-    description: 'Hideout construction kits are used to place Guild Hideouts in the Outlands.',
-    index: '1',
-    uniqueName: 'UNIQUE_HIDEOUT',
-  },
-  {
-    name: "Journeyman's Tracking Toolkit",
-    description: 'Use this tool to search for tracks in the open world.',
-    index: '2',
-    uniqueName: 'T3_2H_TOOL_TRACKING',
-  },
-]
+interface PricesItem {
+  item_id: string
+  city: string
+  quality: number
+  sell_price_min: number
+  sell_price_min_date: string
+  sell_price_max: number
+  sell_price_max_date: string
+  buy_price_min: number
+  buy_price_min_date: string
+  buy_price_max: number
+  buy_price_max_date: string
+}
 
 const Home = () => {
   const items = ['T8_BAG']
+  const [data, setData] = useState<PricesItem[] | null>(null)
 
   const [responseFeedback, setResponseFeedback] = useState(
     'Waiting for "Make API call" button to be pressed.'
   )
 
   const handleClick = async () => {
-    const data = await callPricesAPI({ items, markets, setResponseFeedback })
+    setData(await callPricesAPI({ items, markets, setResponseFeedback }))
     console.log(data)
     console.log(getUniqueNames(data))
   }
@@ -41,6 +41,21 @@ const Home = () => {
         <p className={styles.marginBottom}>Black Market items prices test.</p>
         <Button onClick={handleClick}>Make API call</Button>
         <p className={styles.marginTop}>{responseFeedback}</p>
+      </div>
+      <h1>JSON Data</h1>
+      <div className={styles.container}>
+        <ul>
+          {data &&
+            data.map((item, index) => (
+              <li key={index}>
+                <strong>Item ID:</strong> {item.item_id}, <strong>City:</strong> {item.city},{' '}
+                <strong>Quality:</strong> {item.quality}, <strong>Sell Price Min:</strong>{' '}
+                {item.sell_price_min}, <strong>Sell Price Max:</strong> {item.sell_price_max},{' '}
+                <strong>Buy Price Min:</strong> {item.buy_price_min},{' '}
+                <strong>Buy Price Max:</strong> {item.buy_price_max}
+              </li>
+            ))}
+        </ul>
       </div>
     </main>
   )
