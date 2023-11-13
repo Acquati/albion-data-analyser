@@ -24,11 +24,25 @@
   margin: 2rem auto;
 }
 
-.container ul {
-  list-style-type: none;
-  padding: 0;
+.container .table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
 
-.container li {
-  margin-bottom: 1rem;
+.container th,
+.container td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.container th,
+.container td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  /* text-align: left; */
+}
+
+.textAlignRight {
+  text-align: right;
 }

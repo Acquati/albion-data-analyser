@@ -42,20 +42,35 @@ const Home = () => {
         <Button onClick={handleClick}>Make API call</Button>
         <p className={styles.marginTop}>{responseFeedback}</p>
       </div>
-      <h1>JSON Data</h1>
+      <h1 className={styles.marginTop}>JSON Data</h1>
       <div className={styles.container}>
-        <ul>
-          {data &&
-            data.map((item, index) => (
-              <li key={index}>
-                <strong>Item ID:</strong> {item.item_id}, <strong>City:</strong> {item.city},{' '}
-                <strong>Quality:</strong> {item.quality}, <strong>Sell Price Min:</strong>{' '}
-                {item.sell_price_min}, <strong>Sell Price Max:</strong> {item.sell_price_max},{' '}
-                <strong>Buy Price Min:</strong> {item.buy_price_min},{' '}
-                <strong>Buy Price Max:</strong> {item.buy_price_max}
-              </li>
-            ))}
-        </ul>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th>Item ID</th>
+              <th>City</th>
+              <th>Quality</th>
+              <th>Sell Price Min</th>
+              <th>Sell Price Max</th>
+              <th>Buy Price Min</th>
+              <th>Buy Price Max</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data &&
+              data.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.item_id}</td>
+                  <td>{item.city}</td>
+                  <td className={styles.textAlignRight}>{item.quality}</td>
+                  <td className={styles.textAlignRight}>{item.sell_price_min}</td>
+                  <td className={styles.textAlignRight}>{item.sell_price_max}</td>
+                  <td className={styles.textAlignRight}>{item.buy_price_min}</td>
+                  <td className={styles.textAlignRight}>{item.buy_price_max}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
       </div>
     </main>
   )
