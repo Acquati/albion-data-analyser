@@ -1,18 +1,18 @@
 import { Dispatch, SetStateAction } from 'react'
 import { MarketItem } from '@/types/MarketItem'
 
-interface CallPricesAPI {
+interface GetPrices {
   items: string[]
-  markets: string[]
+  marketNames: string[]
   setResponseFeedback: Dispatch<SetStateAction<string>>
 }
 
-const callPricesAPI = async ({ items, markets, setResponseFeedback }: CallPricesAPI) => {
+const getPrices = async ({ items, marketNames, setResponseFeedback }: GetPrices) => {
   const APIHostURL = 'https://west.albion-online-data.com'
   const pricesEndpoint = '/api/v2/stats/Prices/'
   const itemList = items.join('%2C')
   const format = '.json'
-  const locations = '?locations=' + markets.join('%2C')
+  const locations = '?locations=' + marketNames.join('%2C')
   // 0 = all the qualities, 1 to 5 specific quality
   const qualities = '&qualities=' + '0'
   const APIEndpoint = pricesEndpoint + itemList + format + locations + qualities
@@ -74,4 +74,4 @@ const callPricesAPI = async ({ items, markets, setResponseFeedback }: CallPrices
   }
 }
 
-export default callPricesAPI
+export default getPrices

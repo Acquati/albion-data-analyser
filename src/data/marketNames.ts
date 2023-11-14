@@ -1,12 +1,12 @@
-const markets = [
+const marketNames = [
   'Thetford',
-  'FortSterling',
   'Lymhurst',
   'Bridgewatch',
   'Martlock',
+  'FortSterling',
   'Caerleon',
-  'BlackMarket',
   'Brecilien',
+  'BlackMarket',
 ]
 
-export default markets
+export default marketNames
