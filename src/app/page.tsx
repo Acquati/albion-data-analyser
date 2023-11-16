@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import styles from '@/app/page.module.css'
 import Button from '@/components/Button'
-import getPrices from '@/utils/getPrices'
+import getPrices from '@/lib/getPrices'
 
 const Home = () => {
   const items = ['T8_BAG']

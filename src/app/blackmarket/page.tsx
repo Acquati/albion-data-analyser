@@ -3,7 +3,7 @@ import { useState } from 'react'
 import styles from '@/app/page.module.css'
 import Button from '@/components/Button'
 import marketNames from '@/data/marketNames'
-import getPrices from '@/utils/getPrices'
+import getPrices from '@/lib/getPrices'
 import { MarketItem } from '@/types/MarketItem'
 
 const BlackMarket = () => {
