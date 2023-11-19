@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import styles from '@/app/page.module.css'
-import Button from '@/components/Button'
+import Button from '@/components/button'
 import getPrices from '@/lib/getPrices'
 
 const Home = () => {
@@ -18,14 +18,12 @@ const Home = () => {
   }
 
   return (
-    <main className={styles.main}>
-      <h1 className={styles.marginBottom}>Albion Data Analyser</h1>
-      <div className={styles.result}>
-        <p className={styles.marginBottom}>Markets items prices test.</p>
-        <Button onClick={handleClick}>Make API Call</Button>
-        <p className={styles.marginTop}>{responseFeedback}</p>
-      </div>
-    </main>
+    <div className="space-y-8">
+      <h1 className="text-xl font-medium text-gray-300">Albion Data Analyser</h1>
+      <p className={styles.marginBottom}>Markets items prices test.</p>
+      <Button onClick={handleClick}>Make API Call</Button>
+      <p className={styles.marginTop}>{responseFeedback}</p>
+    </div>
   )
 }
 
