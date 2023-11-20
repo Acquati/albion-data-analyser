@@ -1,12 +1,12 @@
 'use client'
 import { useState } from 'react'
 import styles from '@/app/page.module.css'
-import Button from '@/components/Button'
+import Button from '@/components/button'
 import marketNames from '@/data/marketNames'
 import getPrices from '@/lib/getPrices'
 import { MarketItem } from '@/types/MarketItem'
 
-const BlackMarket = () => {
+const Page = () => {
   const items = ['T8_BAG']
   const [data, setData] = useState<MarketItem[] | null>(null)
 
@@ -20,13 +20,11 @@ const BlackMarket = () => {
   }
 
   return (
-    <main className={styles.main}>
-      <h1 className={styles.marginBottom}>Black Market</h1>
-      <div className={styles.result}>
-        <p className={styles.marginBottom}>Black Market and other cities items prices test.</p>
-        <Button onClick={handleClick}>Make API Call</Button>
-        <p className={styles.marginTop}>{responseFeedback}</p>
-      </div>
+    <div className="space-y-8">
+      <h1 className="text-xl font-medium text-gray-300">Black Market</h1>
+      <p className={styles.marginBottom}>Black Market and other cities items prices test.</p>
+      <Button onClick={handleClick}>Make API Call</Button>
+      <p className={styles.marginTop}>{responseFeedback}</p>
       <h1 className={styles.marginTop}>JSON Data</h1>
       <div className={styles.container}>
         <table className={styles.table}>
@@ -57,8 +55,8 @@ const BlackMarket = () => {
           </tbody>
         </table>
       </div>
-    </main>
+    </div>
   )
 }
 
-export default BlackMarket
+export default Page

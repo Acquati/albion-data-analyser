@@ -10,7 +10,7 @@ export const menuItems: { name: string; items: MenuItem[] }[] = [
     items: [
       {
         name: 'Black Market',
-        slug: 'blackmarket',
+        slug: 'black-market',
         description: 'Black Market and other cities items prices test.',
       },
     ],
@@ -20,7 +20,7 @@ export const menuItems: { name: string; items: MenuItem[] }[] = [
     items: [
       {
         name: 'Genera Items JSON',
-        slug: 'generateitemsjson',
+        slug: 'generate-items-json',
         description: 'Generate a JSON file with the items that are present in the game.',
       },
     ],

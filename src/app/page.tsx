@@ -4,7 +4,7 @@ import styles from '@/app/page.module.css'
 import Button from '@/components/button'
 import getPrices from '@/lib/getPrices'
 
-const Home = () => {
+const Page = () => {
   const items = ['T8_BAG']
   const marketNames = ['BlackMarket']
 
@@ -27,4 +27,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Page
