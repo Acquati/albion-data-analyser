@@ -1,6 +1,5 @@
 'use client'
 import { useState } from 'react'
-import styles from '@/app/page.module.css'
 import Button from '@/components/button'
 import getPrices from '@/lib/getPrices'
 
@@ -20,9 +19,9 @@ const Page = () => {
   return (
     <div className="space-y-8">
       <h1 className="text-xl font-medium text-gray-300">Albion Data Analyser</h1>
-      <p className={styles.marginBottom}>Markets items prices test.</p>
+      <p>Markets items prices test.</p>
       <Button onClick={handleClick}>Make API Call</Button>
-      <p className={styles.marginTop}>{responseFeedback}</p>
+      <p>{responseFeedback}</p>
     </div>
   )
 }

@@ -2,7 +2,7 @@ import colors from 'tailwindcss/colors'
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
-  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
+  content: ['./node_modules/flowbite-react/**/*.js', './src/**/*.{js,ts,jsx,tsx,mdx}'],
   future: {
     hoverOnlyWhenSupported: true,
   },
@@ -82,7 +82,11 @@ const config: Config = {
       }),
     },
   },
-  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+    require('flowbite/plugin'),
+  ],
 }
 
 export default config
