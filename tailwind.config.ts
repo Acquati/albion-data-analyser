@@ -6,7 +6,7 @@ const config: Config = {
   future: {
     hoverOnlyWhenSupported: true,
   },
-  darkMode: 'class',
+  darkMode: 'media',
   theme: {
     extend: {
       // https://vercel.com/design/color
