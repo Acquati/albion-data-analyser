@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useSelectedLayoutSegment } from 'next/navigation'
 import clsx from 'clsx'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/20/solid'
-import { menuItems, type MenuItem } from '@/data/menuItems'
+import { menuItems, type MenuItem } from '@/data/menu-items'
 // import NextLogo from '@/ui/next-logo'
 
 const GlobalNav = () => {
