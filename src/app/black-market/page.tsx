@@ -5,6 +5,8 @@ import marketNames from '@/data/market-names'
 import getPrices from '@/lib/getPrices'
 import { MarketItem } from '@/types/MarketItem'
 import SortButton from '@/components/sort-button'
+import SortQualityToggle from '@/components/sort-quality-toggle'
+import SortSellPriceMinToggle from '@/components/sort-sell-price-min-toggle'
 
 const onSortButtonClick = () => {
   console.log('onSortButtonClick')
@@ -13,20 +15,6 @@ const onSortButtonClick = () => {
 const Page = () => {
   const items = ['T8_BAG']
   const [data, setData] = useState<MarketItem[] | null>(null)
-  const [isSortQualityAscending, setIsSortQualityAscending] = useState<boolean>(true)
-
-  const handleSortQualityToggle = () => {
-    const newOrder = !isSortQualityAscending
-    setIsSortQualityAscending(newOrder)
-
-    if (data) {
-      const newData = [...data].sort((a, b) =>
-        newOrder ? a.quality - b.quality : b.quality - a.quality
-      )
-
-      setData(newData)
-    }
-  }
 
   const [responseFeedback, setResponseFeedback] = useState(
     'Waiting for "Make API Call" button to be pressed.'
@@ -60,13 +48,13 @@ const Page = () => {
               <th scope="col" className="px-6 py-3">
                 <div className="flex items-center">
                   Quality
-                  <SortButton onClick={handleSortQualityToggle} />
+                  <SortQualityToggle data={data} setData={setData} />
                 </div>
               </th>
               <th scope="col" className="px-6 py-3">
                 <div className="flex items-center">
                   Sell Price Min
-                  <SortButton onClick={onSortButtonClick} />
+                  <SortSellPriceMinToggle data={data} setData={setData} />
                 </div>
               </th>
               <th scope="col" className="px-6 py-3">
