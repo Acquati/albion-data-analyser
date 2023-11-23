@@ -23,6 +23,11 @@ export const menuItems: { name: string; items: MenuItem[] }[] = [
         slug: 'generate-items-json',
         description: 'Generate a JSON file with the items that are present in the game.',
       },
+      {
+        name: 'Items Available At Black Market',
+        slug: 'items-available-at-black-market',
+        description: 'Items available at Black Market.',
+      },
     ],
   },
 ]
