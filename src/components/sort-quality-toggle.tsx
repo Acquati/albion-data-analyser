@@ -16,11 +16,11 @@ const SortQualityToggle: React.FC<SortQualityToggleProps> = ({ data, setData }) 
     setIsSortQualityAscending(newOrder)
 
     if (data) {
-      const newData = data.sort((a, b) =>
+      const newData = [...data].sort((a, b) =>
         newOrder ? a.quality - b.quality : b.quality - a.quality
       )
 
-      setData([...newData])
+      setData(newData)
     }
   }
 
