@@ -19,7 +19,6 @@ export async function GET(_request: Request) {
   try {
     const file = await fs.readFile(process.cwd() + '/src/data/items.json', 'utf8')
     const inputData = JSON.parse(file)
-    let lau: ReadableStream<any>
 
     // const inputData = itemsRaw as InputData[]
     const transformedData = transformData(inputData)
@@ -31,7 +30,7 @@ export async function GET(_request: Request) {
     // Write the JSON content to the file
     // await fs.writeFile(filePath, transformedData)
 
-    return new Response({ body: transformedData })
+    return new Response('OK')
   } catch (error) {
     console.error(error)
     return new Response('Error: ' + String(error))
