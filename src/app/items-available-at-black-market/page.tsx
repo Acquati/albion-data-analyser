@@ -61,6 +61,15 @@ const Page = () => {
         <li>Shield</li>
         <li>Torch</li>
         <li>Totem</li>
+        <p>Ranged</p>
+        <li>Bow</li>
+        <li>Crossbow</li>
+        <p>Tool</p>
+        <li>Pickaxe</li>
+        <li>Sickle</li>
+        <li>Skinning Knife</li>
+        <li>Stone Hammer</li>
+        <li>Wood Axe</li>
       </div>
     </div>
   )
