@@ -1,10 +1,12 @@
 interface SortButtonProps {
   onClick: () => any
+  children: React.ReactNode
 }
 
-const SortButton: React.FC<SortButtonProps> = ({ onClick }) => {
+const SortButton: React.FC<SortButtonProps> = ({ onClick, children }) => {
   return (
-    <a onClick={onClick}>
+    <a className="flex flex-row items-center cursor-pointer" onClick={onClick}>
+      {children}
       <svg
         className="w-3 h-3 ms-1.5"
         aria-hidden="true"
