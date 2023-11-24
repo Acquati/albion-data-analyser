@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import Button from '@/components/button'
-import { Item } from '@/types/Item'
 import items from '@/data/items.json'
 
 const Page = () => {
@@ -30,16 +29,32 @@ const Page = () => {
 
     const APIHostURL = 'https://west.albion-online-data.com'
     const pricesEndpoint = '/api/v2/stats/Prices/'
-    const itemList = uniqueNames.join('%2C')
+    // const itemList = uniqueNames.join('%2C')
     const format = '.json'
     const locations = '?locations=' + marketNames.join('%2C')
     // 0 = all the qualities, 1 to 5 specific quality
     const qualities = '&qualities=' + '0'
-    const APIEndpoint = pricesEndpoint + itemList + format + locations + qualities
-    const requestInfo = APIHostURL + APIEndpoint
     const requestInfoWithoutItemList = APIHostURL + pricesEndpoint + format + locations + qualities // 4096 - 95 = 4001
     const maxRequestInfoLength = 4096
     const maxItemListLength = maxRequestInfoLength - requestInfoWithoutItemList.length
+
+    const requestInfoList: (string | null)[] = []
+    let uniqueNameList = ''
+    let requestInfo = ''
+
+    for (const uniqueName of uniqueNames) {
+      if (uniqueNameList.length === 0) {
+        uniqueNameList += uniqueName
+      } else {
+        uniqueNameList += '%2C' + uniqueName
+      }
+    }
+
+    const APIEndpoint = pricesEndpoint + uniqueNameList + format + locations + qualities
+    requestInfo = APIHostURL + APIEndpoint
+    requestInfoList.push(requestInfo)
+
+    console.log(requestInfoList)
   }
 
   return (
