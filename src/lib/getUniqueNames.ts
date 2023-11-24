@@ -1,16 +1,15 @@
 import { MarketItem } from '@/types/MarketItem'
 
 const getUniqueNames = (filteredData: MarketItem[] | null): (string | null)[] => {
-  const uniqueItemIds: String[] = []
-
   if (filteredData === null) {
     return [null]
   }
 
-  const uniqueNames = filteredData
+  let uniqueNames: (string | null)[] = []
+
+  uniqueNames = filteredData
     .map((item) => {
-      if (!uniqueItemIds.includes(item.item_id)) {
-        uniqueItemIds.push(item.item_id)
+      if (!uniqueNames.includes(item.item_id)) {
         return item.item_id
       }
       return null
