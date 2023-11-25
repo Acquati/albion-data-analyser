@@ -28,6 +28,12 @@ export const menuItems: { name: string; items: MenuItem[] }[] = [
         slug: 'items-available-at-black-market',
         description: 'Items available at Black Market.',
       },
+      {
+        name: 'Black Market Prices URLs',
+        slug: 'black-market-prices-urls',
+        description:
+          'Generate the list of URLs to request all the prices of the items on the "Black Market".',
+      },
     ],
   },
 ]

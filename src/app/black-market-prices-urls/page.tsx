@@ -68,9 +68,6 @@ const Page = () => {
     setData(requestInfoList)
 
     setResponseFeedback('URLs generated successfully.')
-
-    // for (const requestInfo in requestInfoList) {
-    // }
   }
 
   return (
