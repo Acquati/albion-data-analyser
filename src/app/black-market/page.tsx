@@ -12,10 +12,6 @@ import SortBuyPriceMaxToggle from '@/components/table/sort-buy-price-max-toggle'
 import SortCityToggle from '@/components/table/sort-city-toggle'
 import SortItemIDToggle from '@/components/table/sort-item-id-toggle'
 
-const onSortButtonClick = () => {
-  console.log('onSortButtonClick')
-}
-
 const Page = () => {
   const items = ['T8_BAG']
   const [data, setData] = useState<MarketItem[] | null>(null)
