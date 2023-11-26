@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Button from '@/components/button'
 import items from '@/data/items.json'
 import generateApiRequests from '@/lib/generateApiRequests'
+import fetchMarketData from '@/lib/fetchMarketData'
 
 const Page = () => {
   const marketNames = ['BlackMarket']
@@ -13,11 +14,19 @@ const Page = () => {
 
   const handleClick = async () => {
     const requestInfoList = generateApiRequests(items, marketNames, setResponseFeedback)
+    // console.log(requestInfoList)
 
-    console.log(requestInfoList)
+    if (requestInfoList !== null) {
+      const blackMarketPrices = await fetchMarketData(requestInfoList, setResponseFeedback)
 
-    // for (const requestInfo in requestInfoList) {
-    // }
+      if (blackMarketPrices !== null) {
+        const validBlackMarketPrices = blackMarketPrices.filter(
+          (item) => item.buy_price_max !== 0 || item.buy_price_min !== 0
+        )
+
+        console.log(validBlackMarketPrices)
+      }
+    }
   }
 
   return (
