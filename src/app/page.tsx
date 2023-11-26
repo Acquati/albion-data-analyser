@@ -4,6 +4,7 @@ import Button from '@/components/button'
 import items from '@/data/items.json'
 import generateApiRequests from '@/lib/generateApiRequests'
 import fetchMarketData from '@/lib/fetchMarketData'
+import { arrayBuffer } from 'stream/consumers'
 
 const Page = () => {
   const marketNames = ['BlackMarket']
@@ -24,7 +25,27 @@ const Page = () => {
           (item) => item.buy_price_max !== 0 || item.buy_price_min !== 0
         )
 
-        console.log(validBlackMarketPrices)
+        const completeBlackMarketPrices = validBlackMarketPrices.map((value) => {
+          const foundItem = items.find((item) => item.uniqueName === value.item_id)
+
+          return {
+            buy_price_max: value.buy_price_max,
+            buy_price_max_date: value.buy_price_max_date,
+            buy_price_min: value.buy_price_min,
+            buy_price_min_date: value.buy_price_min_date,
+            city: value.city,
+            item_id: value.item_id,
+            quality: value.quality,
+            sell_price_max: value.sell_price_max,
+            sell_price_max_date: value.sell_price_max_date,
+            sell_price_min: value.sell_price_min,
+            sell_price_min_date: value.sell_price_min_date,
+            name: foundItem?.name,
+            description: foundItem?.description,
+          }
+        })
+
+        console.log(completeBlackMarketPrices)
       }
     }
   }
