@@ -3,10 +3,10 @@ const marketNames = [
   'Lymhurst',
   'Bridgewatch',
   'Martlock',
-  'FortSterling',
+  'Fort%20Sterling',
   'Caerleon',
+  'Black%20Market',
   'Brecilien',
-  'BlackMarket',
 ]
 
 export default marketNames

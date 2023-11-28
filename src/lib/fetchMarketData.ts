@@ -10,8 +10,6 @@ const fetchMarketData = async (
   let callCount5Min = 0
   let data: MarketItem[] = []
 
-  // console.log(requestInfoList[requestInfoList.lastIndexOf - 1])
-
   try {
     for (let i = 0; i < requestInfoList.length; i++) {
       if (requestInfoList[i].length > 4096) {
@@ -41,6 +39,9 @@ const fetchMarketData = async (
         throw new Error('API call rate limit exceeded 300 per 5 minutes.')
       }
       const response = await fetch(requestInfoList[i])
+      setResponseFeedback(
+        'Fetching data: ' + Math.round((i / requestInfoList.length) * 100) + '% completed.'
+      )
       data = data.concat(await response.json())
     }
 

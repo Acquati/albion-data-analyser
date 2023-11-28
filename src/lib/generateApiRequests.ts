@@ -24,9 +24,9 @@ const generateApiRequests = (
   const locations = '?locations=' + marketNames.join('%2C')
   // 0 = all the qualities, 1 to 5 specific quality
   const qualities = '&qualities=' + '0'
-  const requestInfoWithoutItemList = APIHostURL + pricesEndpoint + format + locations + qualities // 95
+  const requestInfoWithoutItemList = APIHostURL + pricesEndpoint + format + locations + qualities
   const maxRequestInfoLength = 4096
-  const maxItemListLength = maxRequestInfoLength - requestInfoWithoutItemList.length // 4096 - 95 = 4001
+  const maxItemListLength = maxRequestInfoLength - requestInfoWithoutItemList.length
 
   const requestInfoList: string[] = []
   let itemList = ''
@@ -57,9 +57,15 @@ const generateApiRequests = (
     requestInfoList.push(requestInfo)
   }
 
-  setResponseFeedback('URLs generated successfully.')
+  if (requestInfoList.length === 0) {
+    setResponseFeedback('Request information list length = 0.')
 
-  return requestInfoList.length > 0 ? requestInfoList : null
+    return null
+  } else {
+    setResponseFeedback('URLs generated successfully.')
+
+    return requestInfoList.length > 0 ? requestInfoList : null
+  }
 }
 
 export default generateApiRequests

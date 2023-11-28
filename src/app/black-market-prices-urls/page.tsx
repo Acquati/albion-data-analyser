@@ -6,7 +6,7 @@ import generateApiRequests from '@/lib/generateApiRequests'
 
 const Page = () => {
   const [data, setData] = useState<string[] | null>([])
-  const marketNames = ['BlackMarket']
+  const marketNames = ['Black%20Market']
 
   const [responseFeedback, setResponseFeedback] = useState(
     'Waiting for "Generate URLs" button to be pressed.'
