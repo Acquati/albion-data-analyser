@@ -63,8 +63,24 @@ const Page = () => {
       ['Fort%20Sterling'],
       setFortSterlingResponseFeedback
     )
-
     console.log('fortSterlingRequestList', fortSterlingRequestList)
+
+    let fortSterlingPrices: MarketItem[] | null = null
+    if (fortSterlingRequestList !== null) {
+      fortSterlingPrices = await fetchMarketData(
+        fortSterlingRequestList,
+        setFortSterlingResponseFeedback
+      )
+    }
+    console.log('fortSterlingPrices', fortSterlingPrices)
+
+    let validFortSterlingPrices: MarketItem[] | null = null
+    if (fortSterlingPrices !== null) {
+      validFortSterlingPrices = fortSterlingPrices.filter(
+        (item) => item.sell_price_max !== 0 || item.sell_price_min !== 0
+      )
+    }
+    console.log('validFortSterlingPrices', validFortSterlingPrices)
   }
 
   return (
