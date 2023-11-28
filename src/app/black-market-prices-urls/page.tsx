@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Button from '@/components/button'
 import items from '@/data/items.json'
 import generateApiRequests from '@/lib/generateApiRequests'
+import getItemsUniqueNames from '@/lib/getItemsUniqueNames'
 
 const Page = () => {
   const [data, setData] = useState<string[] | null>([])
@@ -13,7 +14,8 @@ const Page = () => {
   )
 
   const handleClick = async () => {
-    const requestInfoList = generateApiRequests(items, marketNames, setResponseFeedback)
+    const uniqueNames = getItemsUniqueNames(items)
+    const requestInfoList = generateApiRequests(uniqueNames, marketNames, setResponseFeedback)
 
     setData(requestInfoList)
 

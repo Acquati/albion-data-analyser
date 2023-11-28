@@ -9,13 +9,6 @@ interface InputData {
   UniqueName: string
 }
 
-interface OutputData {
-  name: string
-  description: string
-  index: string
-  uniqueName: string
-}
-
 const transformData = (inputData: InputData[]): string => {
   const transformedData = inputData.map((item) => {
     const { LocalizedNames, LocalizedDescriptions, Index, UniqueName } = item
@@ -24,8 +17,8 @@ const transformData = (inputData: InputData[]): string => {
       description: LocalizedDescriptions
         ? LocalizedDescriptions['EN-US']
         : LocalizedNames
-        ? LocalizedNames['EN-US']
-        : UniqueName,
+          ? LocalizedNames['EN-US']
+          : UniqueName,
       index: Index,
       uniqueName: UniqueName,
     }

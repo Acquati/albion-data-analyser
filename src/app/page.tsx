@@ -5,21 +5,34 @@ import items from '@/data/items.json'
 import generateApiRequests from '@/lib/generateApiRequests'
 import fetchMarketData from '@/lib/fetchMarketData'
 import { MarketItem } from '@/types/MarketItem'
-import { CompleteMarketItem } from '@/types/CompleteMarketItem'
+import getItemsUniqueNames from '@/lib/getItemsUniqueNames'
+import getMarketItemsUniqueNames from '@/lib/getMarketItemsUniqueNames copy'
 
 const Page = () => {
-  const marketNames = ['Black%20Market']
-
-  const [responseFeedback, setResponseFeedback] = useState(
-    'Waiting for "Generate URLs" button to be pressed.'
+  const [blackMarketResponseFeedback, setBlackMarketResponseFeedback] = useState(
+    'Waiting for "Request Black Market Items" button to be pressed.'
+  )
+  const [fortSterlingResponseFeedback, setFortSterlingResponseFeedback] = useState(
+    'Waiting for "Request Black Market Items" button to be pressed.'
   )
 
   const handleClick = async () => {
-    const requestInfoList = generateApiRequests(items, marketNames, setResponseFeedback)
+    setFortSterlingResponseFeedback('Waiting for Black Market Items to be fetched.')
+
+    const uniqueNames = getItemsUniqueNames(items)
+
+    const blackMarketRequestList = generateApiRequests(
+      uniqueNames,
+      ['Black%20Market'],
+      setBlackMarketResponseFeedback
+    )
 
     let blackMarketPrices: MarketItem[] | null = null
-    if (requestInfoList !== null) {
-      blackMarketPrices = await fetchMarketData(requestInfoList, setResponseFeedback)
+    if (blackMarketRequestList !== null) {
+      blackMarketPrices = await fetchMarketData(
+        blackMarketRequestList,
+        setBlackMarketResponseFeedback
+      )
     }
 
     let validBlackMarketPrices: MarketItem[] | null = null
@@ -29,31 +42,48 @@ const Page = () => {
       )
     }
 
-    let completeBlackMarketPrices: CompleteMarketItem[] = []
-    if (validBlackMarketPrices !== null) {
-      completeBlackMarketPrices = validBlackMarketPrices.map(({ item_id, ...value }) => {
-        const foundItem = items.find((item) => item.uniqueName === item_id)
+    // let completeBlackMarketPrices: CompleteMarketItem[] = []
+    // if (validBlackMarketPrices !== null) {
+    //   completeBlackMarketPrices = validBlackMarketPrices.map(({ item_id, ...value }) => {
+    //     const foundItem = items.find((item) => item.uniqueName === item_id)
 
-        return {
-          ...value,
-          item_id,
-          name: foundItem?.name,
-          description: foundItem?.description,
-        }
-      })
-    }
+    //     return {
+    //       ...value,
+    //       item_id,
+    //       name: foundItem?.name,
+    //       description: foundItem?.description,
+    //     }
+    //   })
+    // }
 
-    const blackMarketItemsNames = completeBlackMarketPrices.map((item) => item.item_id)
+    const blackMarketUniqueNames = getMarketItemsUniqueNames(validBlackMarketPrices)
 
-    console.log(blackMarketItemsNames)
+    const fortSterlingRequestList = generateApiRequests(
+      blackMarketUniqueNames,
+      ['Fort%20Sterling'],
+      setFortSterlingResponseFeedback
+    )
+
+    console.log('fortSterlingRequestList', fortSterlingRequestList)
   }
 
   return (
     <div className="space-y-8">
       <h1 className="text-xl font-medium text-gray-300">Black Market Prices URLs</h1>
       <p>Generate the list of URLs to request all the prices of the items on the "Black Market".</p>
-      <Button onClick={handleClick}>Generate URLs</Button>
-      <p>{responseFeedback}</p>
+      <Button onClick={handleClick}>Request Black Market Items</Button>
+      <p>
+        <span className="inline-block font-medium mr-2 text-gray-300">
+          {'Black Market Feedback:'}
+        </span>
+        {blackMarketResponseFeedback}
+      </p>
+      <p>
+        <span className="inline-block font-medium mr-2 text-gray-300">
+          {'Fort Sterling Feedback:'}
+        </span>
+        {fortSterlingResponseFeedback}
+      </p>
     </div>
   )
 }

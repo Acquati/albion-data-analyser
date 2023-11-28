@@ -1,23 +1,11 @@
 'use client'
-import { Item } from '@/types/Item'
 import { Dispatch, SetStateAction } from 'react'
 
 const generateApiRequests = (
-  items: Item[],
+  uniqueNames: (string | null)[] = [],
   marketNames: string[],
   setResponseFeedback: Dispatch<SetStateAction<string>>
 ): string[] | null => {
-  let uniqueNames: (string | null)[] = []
-
-  uniqueNames = items
-    .map((item) => {
-      if (!uniqueNames.includes(item.uniqueName)) {
-        return item.uniqueName
-      }
-      return null
-    })
-    .filter((item) => item !== null)
-
   const APIHostURL = 'https://west.albion-online-data.com'
   const pricesEndpoint = '/api/v2/stats/Prices/'
   const format = '.json'
