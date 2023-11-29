@@ -1,11 +1,17 @@
+import clsx from 'clsx'
+
 interface SortButtonProps {
   onClick: () => any
+  additionalClass?: string
   children: React.ReactNode
 }
 
-const SortButton: React.FC<SortButtonProps> = ({ onClick, children }) => {
+const SortButton: React.FC<SortButtonProps> = ({ onClick, additionalClass, children }) => {
   return (
-    <a className="flex flex-row items-center cursor-pointer" onClick={onClick}>
+    <a
+      className={clsx('flex flex-row items-center cursor-pointer', additionalClass)}
+      onClick={onClick}
+    >
       {children}
       <svg
         className="w-3 h-3 ms-1.5"

@@ -6,12 +6,14 @@ import SortButton from './sort-button'
 interface SortSellPriceMinToggleProps {
   data: CompleteMarketItem[] | null
   setData: Dispatch<SetStateAction<CompleteMarketItem[] | null>>
+  additionalClass?: string
   children: React.ReactNode
 }
 
 const SortSellPriceMinToggle: React.FC<SortSellPriceMinToggleProps> = ({
   data,
   setData,
+  additionalClass,
   children,
 }) => {
   const [isSortSellPriceMinAscending, setIsSortSellPriceMinAscending] = useState<boolean>(true)
@@ -29,7 +31,11 @@ const SortSellPriceMinToggle: React.FC<SortSellPriceMinToggleProps> = ({
     }
   }
 
-  return <SortButton onClick={onClick}>{children}</SortButton>
+  return (
+    <SortButton onClick={onClick} additionalClass={additionalClass}>
+      {children}
+    </SortButton>
+  )
 }
 
 export default SortSellPriceMinToggle

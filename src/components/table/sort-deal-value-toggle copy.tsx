@@ -6,12 +6,14 @@ import SortButton from './sort-button'
 interface SortReturnOfInvestmentToggleProps {
   data: CompleteMarketItem[] | null
   setData: Dispatch<SetStateAction<CompleteMarketItem[] | null>>
+  additionalClass?: string
   children: React.ReactNode
 }
 
 const SortReturnOfInvestmentToggle: React.FC<SortReturnOfInvestmentToggleProps> = ({
   data,
   setData,
+  additionalClass,
   children,
 }) => {
   const [isSortReturnOfInvestmentAscending, setIsSortReturnOfInvestmentAscending] =
@@ -32,7 +34,11 @@ const SortReturnOfInvestmentToggle: React.FC<SortReturnOfInvestmentToggleProps> 
     }
   }
 
-  return <SortButton onClick={onClick}>{children}</SortButton>
+  return (
+    <SortButton onClick={onClick} additionalClass={additionalClass}>
+      {children}
+    </SortButton>
+  )
 }
 
 export default SortReturnOfInvestmentToggle

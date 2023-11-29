@@ -163,38 +163,55 @@ const Page = () => {
                   Name
                 </SortNameToggle>
               </th>
-              <th scope="col" className="px-4 py-3 text-right whitespace-nowrap">
-                <SortQualityToggle data={completeBestDeals} setData={setCompleteBestDeals}>
+              <th scope="col" className="px-4 py-3 whitespace-nowrap">
+                <SortQualityToggle
+                  data={completeBestDeals}
+                  setData={setCompleteBestDeals}
+                  additionalClass={'justify-end'}
+                >
                   Quality
                 </SortQualityToggle>
               </th>
-              <th scope="col" className="px-4 py-3 text-right whitespace-nowrap">
-                <SortDealValueToggle data={completeBestDeals} setData={setCompleteBestDeals}>
+              <th scope="col" className="px-4 py-3 whitespace-nowrap">
+                <SortDealValueToggle
+                  data={completeBestDeals}
+                  setData={setCompleteBestDeals}
+                  additionalClass={'justify-end'}
+                >
                   Deal Value
                 </SortDealValueToggle>
               </th>
-              <th scope="col" className="px-4 py-3 text-right whitespace-nowrap">
+              <th scope="col" className="px-4 py-3 whitespace-nowrap">
                 <SortReturnOfInvestmentToggle
                   data={completeBestDeals}
                   setData={setCompleteBestDeals}
+                  additionalClass={'justify-end'}
                 >
                   ROI
                 </SortReturnOfInvestmentToggle>
               </th>
-              <th scope="col" className="px-4 py-3 text-right whitespace-nowrap">
-                <SortSellPriceMinToggle data={completeBestDeals} setData={setCompleteBestDeals}>
+              <th scope="col" className="px-4 py-3 whitespace-nowrap">
+                <SortSellPriceMinToggle
+                  data={completeBestDeals}
+                  setData={setCompleteBestDeals}
+                  additionalClass={'justify-end'}
+                >
                   Sell Price Min
                 </SortSellPriceMinToggle>
               </th>
-              <th scope="col" className="px-4 py-3 text-right whitespace-nowrap">
+              <th scope="col" className="px-4 py-3 whitespace-nowrap text-right">
                 Sell Price Date
               </th>
-              <th scope="col" className="px-4 py-3 text-right whitespace-nowrap">
-                <SortBuyPriceMaxToggle data={completeBestDeals} setData={setCompleteBestDeals}>
+              <th scope="col" className="px-4 py-3 whitespace-nowrap">
+                <SortBuyPriceMaxToggle
+                  data={completeBestDeals}
+                  setData={setCompleteBestDeals}
+                  additionalClass={'justify-end'}
+                >
                   Buy Price Max
                 </SortBuyPriceMaxToggle>
               </th>
-              <th scope="col" className="px-4 py-3 text-right whitespace-nowrap">
+              <th scope="col" className="px-4 py-3 whitespace-nowrap text-right">
                 Buy Price Date
               </th>
             </tr>
@@ -216,25 +233,25 @@ const Page = () => {
                       {item.name}
                     </a>
                   </td>
-                  <td className="px-4 py-3 text-right dark:text-white font-mono whitespace-nowrap">
+                  <td className="px-4 py-3 dark:text-white font-mono whitespace-nowrap text-right">
                     {item.quality}
                   </td>
-                  <td className="px-4 py-3 text-right dark:text-white font-mono whitespace-nowrap">
+                  <td className="px-4 py-3 dark:text-white font-mono whitespace-nowrap text-right">
                     {item.dealValue}
                   </td>
-                  <td className="px-4 py-3 text-right dark:text-white font-mono whitespace-nowrap">
+                  <td className="px-4 py-3 dark:text-white font-mono whitespace-nowrap text-right">
                     {item.returnOfInvestment.toFixed(2)}
                   </td>
-                  <td className="px-4 py-3 text-right dark:text-white font-mono whitespace-nowrap">
+                  <td className="px-4 py-3 dark:text-white font-mono whitespace-nowrap text-right">
                     {item.sell_price_min}
                   </td>
-                  <td className="px-4 py-3 text-right dark:text-white font-mono whitespace-nowrap">
+                  <td className="px-4 py-3 dark:text-white font-mono whitespace-nowrap text-right">
                     {convertDateToMinutesSinceNow(item.sell_price_min_date)}
                   </td>
-                  <td className="px-4 py-3 text-right dark:text-white font-mono whitespace-nowrap">
+                  <td className="px-4 py-3 dark:text-white font-mono whitespace-nowrap text-right">
                     {item.buy_price_max}
                   </td>
-                  <td className="px-4 py-3 text-right dark:text-white font-mono whitespace-nowrap">
+                  <td className="px-4 py-3 dark:text-white font-mono whitespace-nowrap text-right">
                     {convertDateToMinutesSinceNow(item.buy_price_max_date)}
                   </td>
                 </tr>

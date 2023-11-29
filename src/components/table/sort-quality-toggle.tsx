@@ -6,10 +6,16 @@ import SortButton from './sort-button'
 interface SortQualityToggleProps {
   data: CompleteMarketItem[] | null
   setData: Dispatch<SetStateAction<CompleteMarketItem[] | null>>
+  additionalClass?: string
   children: React.ReactNode
 }
 
-const SortQualityToggle: React.FC<SortQualityToggleProps> = ({ data, setData, children }) => {
+const SortQualityToggle: React.FC<SortQualityToggleProps> = ({
+  data,
+  setData,
+  additionalClass,
+  children,
+}) => {
   const [isSortQualityAscending, setIsSortQualityAscending] = useState<boolean>(true)
 
   const onClick = () => {
@@ -25,7 +31,11 @@ const SortQualityToggle: React.FC<SortQualityToggleProps> = ({ data, setData, ch
     }
   }
 
-  return <SortButton onClick={onClick}>{children}</SortButton>
+  return (
+    <SortButton onClick={onClick} additionalClass={additionalClass}>
+      {children}
+    </SortButton>
+  )
 }
 
 export default SortQualityToggle
