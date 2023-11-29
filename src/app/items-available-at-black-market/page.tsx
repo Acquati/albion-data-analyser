@@ -54,17 +54,17 @@ const Page = () => {
         <li>Quarterstaff</li>
         <li>Spear</li>
         <li>Sword</li>
-        <p>Off-Hand</p>
+        <p>Off-Hand - 1 Pass</p>
         <li>Book</li>
         <li>Horn</li>
         <li>Orb</li>
         <li>Shield</li>
         <li>Torch</li>
         <li>Totem</li>
-        <p>Ranged</p>
+        <p>Ranged - 1 Pass</p>
         <li>Bow</li>
         <li>Crossbow</li>
-        <p>Tool</p>
+        <p>Tool - 1 Pass</p>
         <li>Pickaxe</li>
         <li>Sickle</li>
         <li>Skinning Knife</li>

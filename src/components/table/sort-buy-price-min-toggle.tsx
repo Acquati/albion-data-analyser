@@ -1,11 +1,11 @@
 'use client'
 import { Dispatch, SetStateAction, useState } from 'react'
-import { MarketItem } from '@/types/MarketItem'
+import { CompleteMarketItem } from '@/types/CompleteMarketItem'
 import SortButton from './sort-button'
 
 interface SortBuyPriceMinToggleProps {
-  data: MarketItem[] | null
-  setData: Dispatch<SetStateAction<MarketItem[] | null>>
+  data: CompleteMarketItem[] | null
+  setData: Dispatch<SetStateAction<CompleteMarketItem[] | null>>
   children: React.ReactNode
 }
 

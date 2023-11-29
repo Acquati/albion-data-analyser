@@ -3,22 +3,24 @@ import { Dispatch, SetStateAction, useState } from 'react'
 import { CompleteMarketItem } from '@/types/CompleteMarketItem'
 import SortButton from './sort-button'
 
-interface SortQualityToggleProps {
+interface SortNameToggleProps {
   data: CompleteMarketItem[] | null
   setData: Dispatch<SetStateAction<CompleteMarketItem[] | null>>
   children: React.ReactNode
 }
 
-const SortQualityToggle: React.FC<SortQualityToggleProps> = ({ data, setData, children }) => {
-  const [isSortQualityAscending, setIsSortQualityAscending] = useState<boolean>(true)
+const SortNameToggle: React.FC<SortNameToggleProps> = ({ data, setData, children }) => {
+  const [isSortNameAscending, setIsSortNameAscending] = useState<boolean>(true)
 
   const onClick = () => {
-    const newOrder = !isSortQualityAscending
-    setIsSortQualityAscending(newOrder)
+    const newOrder = !isSortNameAscending
+    setIsSortNameAscending(newOrder)
 
     if (data) {
       const newData = [...data].sort((a, b) =>
-        newOrder ? a.quality - b.quality : b.quality - a.quality
+        newOrder
+          ? (a.name ?? '').localeCompare(b.name ?? '')
+          : (b.name ?? '').localeCompare(a.name ?? '')
       )
 
       setData(newData)
@@ -28,4 +30,4 @@ const SortQualityToggle: React.FC<SortQualityToggleProps> = ({ data, setData, ch
   return <SortButton onClick={onClick}>{children}</SortButton>
 }
 
-export default SortQualityToggle
+export default SortNameToggle

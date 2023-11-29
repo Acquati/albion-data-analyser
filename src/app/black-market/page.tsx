@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import Button from '@/components/button'
 import marketNames from '@/data/market-names'
 import getPrices from '@/lib/getPrices'
@@ -11,6 +11,7 @@ import SortBuyPriceMinToggle from '@/components/table/sort-buy-price-min-toggle'
 import SortBuyPriceMaxToggle from '@/components/table/sort-buy-price-max-toggle'
 import SortCityToggle from '@/components/table/sort-city-toggle'
 import SortItemIDToggle from '@/components/table/sort-item-id-toggle'
+import { CompleteMarketItem } from '@/types/CompleteMarketItem'
 
 const Page = () => {
   const items = ['T8_BAG']
@@ -37,37 +38,58 @@ const Page = () => {
           <thead className="text-xs  lg:text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
-                <SortItemIDToggle data={data} setData={setData}>
+                <SortItemIDToggle
+                  data={data as CompleteMarketItem[]}
+                  setData={setData as Dispatch<SetStateAction<CompleteMarketItem[] | null>>}
+                >
                   Item ID
                 </SortItemIDToggle>
               </th>
               <th scope="col" className="px-6 py-3">
-                <SortCityToggle data={data} setData={setData}>
+                <SortCityToggle
+                  data={data as CompleteMarketItem[]}
+                  setData={setData as Dispatch<SetStateAction<CompleteMarketItem[] | null>>}
+                >
                   City
                 </SortCityToggle>
               </th>
               <th scope="col" className="px-6 py-3">
-                <SortQualityToggle data={data} setData={setData}>
+                <SortQualityToggle
+                  data={data as CompleteMarketItem[]}
+                  setData={setData as Dispatch<SetStateAction<CompleteMarketItem[] | null>>}
+                >
                   Quality
                 </SortQualityToggle>
               </th>
               <th scope="col" className="px-6 py-3">
-                <SortSellPriceMinToggle data={data} setData={setData}>
+                <SortSellPriceMinToggle
+                  data={data as CompleteMarketItem[]}
+                  setData={setData as Dispatch<SetStateAction<CompleteMarketItem[] | null>>}
+                >
                   Sell Price Min
                 </SortSellPriceMinToggle>
               </th>
               <th scope="col" className="px-6 py-3">
-                <SortSellPriceMaxToggle data={data} setData={setData}>
+                <SortSellPriceMaxToggle
+                  data={data as CompleteMarketItem[]}
+                  setData={setData as Dispatch<SetStateAction<CompleteMarketItem[] | null>>}
+                >
                   Sell Price Max
                 </SortSellPriceMaxToggle>
               </th>
               <th scope="col" className="px-6 py-3">
-                <SortBuyPriceMinToggle data={data} setData={setData}>
+                <SortBuyPriceMinToggle
+                  data={data as CompleteMarketItem[]}
+                  setData={setData as Dispatch<SetStateAction<CompleteMarketItem[] | null>>}
+                >
                   Buy Price Min
                 </SortBuyPriceMinToggle>
               </th>
               <th scope="col" className="px-6 py-3">
-                <SortBuyPriceMaxToggle data={data} setData={setData}>
+                <SortBuyPriceMaxToggle
+                  data={data as CompleteMarketItem[]}
+                  setData={setData as Dispatch<SetStateAction<CompleteMarketItem[] | null>>}
+                >
                   Buy Price Max
                 </SortBuyPriceMaxToggle>
               </th>
