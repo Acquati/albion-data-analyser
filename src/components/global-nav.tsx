@@ -12,8 +12,10 @@ const GlobalNav = () => {
   const close = () => setIsOpen(false)
 
   return (
-    <div className="fixed top-0 z-10 flex w-full flex-col border-b border-gray-800 bg-black lg:bottom-0 lg:z-auto lg:w-72 lg:border-b-0 lg:border-r lg:border-gray-800">
-      <div className="flex h-14 items-center px-4 py-4 lg:h-auto">
+    // <div className="fixed top-0 z-10 flex w-full flex-col border-b border-gray-800 bg-black lg:bottom-0 lg:z-auto lg:w-72 lg:border-b-0 lg:border-r lg:border-gray-800">
+    <div className="fixed top-0 z-10 flex w-full flex-col border-b border-gray-800 bg-black">
+      {/* <div className="flex h-14 items-center px-4 py-4 lg:h-auto"> */}
+      <div className="flex h-14 items-center px-4 py-4">
         <Link href="/" className="group flex w-full items-center gap-x-2.5" onClick={close}>
           {/* <div className="h-7 w-7 rounded-full border border-white/30 group-hover:border-white/50">
             <NextLogo />
@@ -24,9 +26,14 @@ const GlobalNav = () => {
           </h3>
         </Link>
       </div>
-      <button
+      {/* <button
         type="button"
         className="group absolute right-0 top-0 flex h-14 items-center gap-x-2 px-4 lg:hidden"
+        onClick={() => setIsOpen(!isOpen)}
+      > */}
+      <button
+        type="button"
+        className="group absolute right-0 top-0 flex h-14 items-center gap-x-2 px-4"
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="font-medium text-gray-100 group-hover:text-gray-400">Menu</div>
@@ -37,8 +44,14 @@ const GlobalNav = () => {
         )}
       </button>
 
-      <div
+      {/* <div
         className={clsx('overflow-y-auto lg:static lg:block', {
+          'fixed inset-x-0 bottom-0 top-14 mt-px bg-black': isOpen,
+          hidden: !isOpen,
+        })}
+      > */}
+      <div
+        className={clsx('overflow-y-auto', {
           'fixed inset-x-0 bottom-0 top-14 mt-px bg-black': isOpen,
           hidden: !isOpen,
         })}

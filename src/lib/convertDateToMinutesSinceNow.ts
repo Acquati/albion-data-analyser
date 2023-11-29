@@ -8,6 +8,7 @@ const convertDateToMinutesSinceNow = (dateString: string): number => {
 
   // Calculate the time difference in milliseconds
   const timeDifference = currentDate.getTime() - inputDate.getTime()
+
   // Convert milliseconds to minutes
   const minutesDifference = timeDifference / (1000 * 60)
 

@@ -24,6 +24,8 @@ const Page = () => {
   const [cityResponseFeedback, setCityResponseFeedback] = useState(
     'Waiting for "Request Black Market Items" button to be pressed.'
   )
+  const [dealValueMin, setDealValueMin] = useState(3000)
+  const [cityPriceMax, setCityPriceMax] = useState(500000)
 
   const [completeBestDeals, setCompleteBestDeals] = useState<CompleteMarketItem[] | null>(null)
 
@@ -57,7 +59,7 @@ const Page = () => {
 
     const cityRequestList = generateApiRequests(
       blackMarketUniqueNames,
-      ['Fort%20Sterling'],
+      ['Caerleon'],
       setCityResponseFeedback
     )
 
@@ -85,7 +87,7 @@ const Page = () => {
           dealValue = Math.floor(blackMarketItem?.buy_price_max * 0.92) - cityItem.sell_price_min
         }
 
-        return dealValue >= 3000 && cityItem.sell_price_min < 500000 // && dealValue / cityItem.sell_price_min >= 1.5
+        return dealValue >= dealValueMin && cityItem.sell_price_min < cityPriceMax // && dealValue / cityItem.sell_price_min >= 1.5
       })
     }
 
@@ -104,10 +106,16 @@ const Page = () => {
 
           return {
             ...value,
+            buy_price_max: blackMarketItem ? blackMarketItem.buy_price_max : 0,
+            buy_price_max_date: blackMarketItem
+              ? blackMarketItem.buy_price_max_date
+              : '0001-01-01T00:00:00',
+            buy_price_min: blackMarketItem ? blackMarketItem.buy_price_min : 0,
+            buy_price_min_date: blackMarketItem
+              ? blackMarketItem.buy_price_min_date
+              : '0001-01-01T00:00:00',
             item_id,
             sell_price_min,
-            buy_price_min: blackMarketItem ? blackMarketItem.buy_price_min : 0,
-            buy_price_max: blackMarketItem ? blackMarketItem.buy_price_max : 0,
             name: foundItem?.name,
             description: foundItem?.description,
             dealValue: dealValue,
@@ -116,7 +124,10 @@ const Page = () => {
         })
       )
     }
-    console.log(completeBestDeals)
+  }
+
+  const handleClick2 = () => {
+    convertDateToMinutesSinceNow('2023-11-29T01:45:00')
   }
 
   return (
@@ -124,6 +135,7 @@ const Page = () => {
       <h1 className="text-xl font-medium text-gray-300">Black Market Deals</h1>
       <p>List of best Deals on the "Black Market".</p>
       <Button onClick={handleClick}>Request Black Market Items</Button>
+      <Button onClick={handleClick2}>Test</Button>
       <p>
         <span className="inline-block font-medium mr-2 text-gray-300">
           {'Black Market Request Feedback:'}
@@ -138,30 +150,30 @@ const Page = () => {
       </p>
 
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-sm lg:text-base text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <table className="w-full text-sm lg:text-base text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs  lg:text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-4 py-3 whitespace-nowrap">
                 <SortItemIDToggle data={completeBestDeals} setData={setCompleteBestDeals}>
                   Item ID
                 </SortItemIDToggle>
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-4 py-3 whitespace-nowrap">
                 <SortNameToggle data={completeBestDeals} setData={setCompleteBestDeals}>
                   Name
                 </SortNameToggle>
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-4 py-3 text-right whitespace-nowrap">
                 <SortQualityToggle data={completeBestDeals} setData={setCompleteBestDeals}>
                   Quality
                 </SortQualityToggle>
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-4 py-3 text-right whitespace-nowrap">
                 <SortDealValueToggle data={completeBestDeals} setData={setCompleteBestDeals}>
                   Deal Value
                 </SortDealValueToggle>
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-4 py-3 text-right whitespace-nowrap">
                 <SortReturnOfInvestmentToggle
                   data={completeBestDeals}
                   setData={setCompleteBestDeals}
@@ -169,18 +181,21 @@ const Page = () => {
                   ROI
                 </SortReturnOfInvestmentToggle>
               </th>
-              <th scope="col" className="px-6 py-3">
-                Date Minutes
-              </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-4 py-3 text-right whitespace-nowrap">
                 <SortSellPriceMinToggle data={completeBestDeals} setData={setCompleteBestDeals}>
                   Sell Price Min
                 </SortSellPriceMinToggle>
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-4 py-3 text-right whitespace-nowrap">
+                Sell Price Date
+              </th>
+              <th scope="col" className="px-4 py-3 text-right whitespace-nowrap">
                 <SortBuyPriceMaxToggle data={completeBestDeals} setData={setCompleteBestDeals}>
                   Buy Price Max
                 </SortBuyPriceMaxToggle>
+              </th>
+              <th scope="col" className="px-4 py-3 text-right whitespace-nowrap">
+                Buy Price Date
               </th>
             </tr>
           </thead>
@@ -188,10 +203,10 @@ const Page = () => {
             {completeBestDeals &&
               completeBestDeals.map((item, index) => (
                 <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={index}>
-                  <th scope="row" className="px-5 py-3">
+                  <th scope="row" className="px-4 py-3 whitespace-nowrap">
                     {item.item_id}
                   </th>
-                  <td className="px-5 py-3">
+                  <td className="px-4 py-3 whitespace-nowrap">
                     <a
                       className="cursor-pointer"
                       onClick={() => {
@@ -201,21 +216,26 @@ const Page = () => {
                       {item.name}
                     </a>
                   </td>
-                  <td className="px-5 py-3 text-right dark:text-white font-mono">{item.quality}</td>
-                  <td className="px-5 py-3 text-right dark:text-white font-mono">
+                  <td className="px-4 py-3 text-right dark:text-white font-mono whitespace-nowrap">
+                    {item.quality}
+                  </td>
+                  <td className="px-4 py-3 text-right dark:text-white font-mono whitespace-nowrap">
                     {item.dealValue}
                   </td>
-                  <td className="px-5 py-3 text-right dark:text-white font-mono">
+                  <td className="px-4 py-3 text-right dark:text-white font-mono whitespace-nowrap">
                     {item.returnOfInvestment.toFixed(2)}
                   </td>
-                  <td className="px-5 py-3 text-right dark:text-white font-mono">
-                    {convertDateToMinutesSinceNow(item.sell_price_min_date)}
-                  </td>
-                  <td className="px-5 py-3 text-right dark:text-white font-mono">
+                  <td className="px-4 py-3 text-right dark:text-white font-mono whitespace-nowrap">
                     {item.sell_price_min}
                   </td>
-                  <td className="px-5 py-3 text-right dark:text-white font-mono">
+                  <td className="px-4 py-3 text-right dark:text-white font-mono whitespace-nowrap">
+                    {convertDateToMinutesSinceNow(item.sell_price_min_date)}
+                  </td>
+                  <td className="px-4 py-3 text-right dark:text-white font-mono whitespace-nowrap">
                     {item.buy_price_max}
+                  </td>
+                  <td className="px-4 py-3 text-right dark:text-white font-mono whitespace-nowrap">
+                    {convertDateToMinutesSinceNow(item.buy_price_max_date)}
                   </td>
                 </tr>
               ))}
