@@ -9,15 +9,13 @@ import getItemsUniqueNames from '@/lib/getItemsUniqueNames'
 import getMarketItemsUniqueNames from '@/lib/getMarketItemsUniqueNames copy'
 import { CompleteMarketItem } from '@/types/CompleteMarketItem'
 import SortItemIDToggle from '@/components/table/sort-item-id-toggle'
-import SortCityToggle from '@/components/table/sort-city-toggle'
 import SortQualityToggle from '@/components/table/sort-quality-toggle'
 import SortSellPriceMinToggle from '@/components/table/sort-sell-price-min-toggle'
-import SortSellPriceMaxToggle from '@/components/table/sort-sell-price-max-toggle'
-import SortBuyPriceMinToggle from '@/components/table/sort-buy-price-min-toggle'
 import SortBuyPriceMaxToggle from '@/components/table/sort-buy-price-max-toggle'
 import SortNameToggle from '@/components/table/sort-name-toggle'
 import SortDealValueToggle from '@/components/table/sort-deal-value-toggle'
 import SortReturnOfInvestmentToggle from '@/components/table/sort-deal-value-toggle copy'
+import convertDateToMinutesSinceNow from '@/lib/convertDateToMinutesSinceNow'
 
 const Page = () => {
   const [blackMarketResponseFeedback, setBlackMarketResponseFeedback] = useState(
@@ -154,6 +152,11 @@ const Page = () => {
                 </SortNameToggle>
               </th>
               <th scope="col" className="px-6 py-3">
+                <SortQualityToggle data={completeBestDeals} setData={setCompleteBestDeals}>
+                  Quality
+                </SortQualityToggle>
+              </th>
+              <th scope="col" className="px-6 py-3">
                 <SortDealValueToggle data={completeBestDeals} setData={setCompleteBestDeals}>
                   Deal Value
                 </SortDealValueToggle>
@@ -167,25 +170,13 @@ const Page = () => {
                 </SortReturnOfInvestmentToggle>
               </th>
               <th scope="col" className="px-6 py-3">
-                <SortQualityToggle data={completeBestDeals} setData={setCompleteBestDeals}>
-                  Quality
-                </SortQualityToggle>
+                Date Minutes
               </th>
               <th scope="col" className="px-6 py-3">
                 <SortSellPriceMinToggle data={completeBestDeals} setData={setCompleteBestDeals}>
                   Sell Price Min
                 </SortSellPriceMinToggle>
               </th>
-              <th scope="col" className="px-6 py-3">
-                <SortSellPriceMaxToggle data={completeBestDeals} setData={setCompleteBestDeals}>
-                  Sell Price Max
-                </SortSellPriceMaxToggle>
-              </th>
-              {/* <th scope="col" className="px-6 py-3">
-                <SortBuyPriceMinToggle data={completeBestDeals} setData={setCompleteBestDeals}>
-                  Buy Price Min
-                </SortBuyPriceMinToggle>
-              </th> */}
               <th scope="col" className="px-6 py-3">
                 <SortBuyPriceMaxToggle data={completeBestDeals} setData={setCompleteBestDeals}>
                   Buy Price Max
@@ -210,22 +201,19 @@ const Page = () => {
                       {item.name}
                     </a>
                   </td>
+                  <td className="px-5 py-3 text-right dark:text-white font-mono">{item.quality}</td>
                   <td className="px-5 py-3 text-right dark:text-white font-mono">
                     {item.dealValue}
                   </td>
                   <td className="px-5 py-3 text-right dark:text-white font-mono">
                     {item.returnOfInvestment.toFixed(2)}
                   </td>
-                  <td className="px-5 py-3 text-right dark:text-white font-mono">{item.quality}</td>
+                  <td className="px-5 py-3 text-right dark:text-white font-mono">
+                    {convertDateToMinutesSinceNow(item.sell_price_min_date)}
+                  </td>
                   <td className="px-5 py-3 text-right dark:text-white font-mono">
                     {item.sell_price_min}
                   </td>
-                  <td className="px-5 py-3 text-right dark:text-white font-mono">
-                    {item.sell_price_max}
-                  </td>
-                  {/* <td className="px-5 py-3 text-right dark:text-white font-mono">
-                    {item.buy_price_min}
-                  </td> */}
                   <td className="px-5 py-3 text-right dark:text-white font-mono">
                     {item.buy_price_max}
                   </td>
