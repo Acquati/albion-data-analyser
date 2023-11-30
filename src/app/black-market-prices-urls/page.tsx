@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import Button from '@/components/button'
-import items from '@/data/items.json'
+import items from '@/data/market_items.json'
 import generateApiRequests from '@/lib/generateApiRequests'
 import getItemsUniqueNames from '@/lib/getItemsUniqueNames'
 

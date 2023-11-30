@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import Button from '@/components/button'
-import items from '@/data/items.json'
+import items from '@/data/market_items.json'
 import generateApiRequests from '@/lib/generateApiRequests'
 import fetchMarketData from '@/lib/fetchMarketData'
 import { MarketItem } from '@/types/MarketItem'
@@ -221,7 +221,14 @@ const Page = () => {
               completeBestDeals.map((item, index) => (
                 <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={index}>
                   <th scope="row" className="px-4 py-3 whitespace-nowrap">
-                    {item.item_id}
+                    <a
+                      className="cursor-pointer"
+                      onClick={() => {
+                        navigator.clipboard.writeText(item.item_id ?? '')
+                      }}
+                    >
+                      {item.item_id}
+                    </a>
                   </th>
                   <td className="px-4 py-3 whitespace-nowrap">
                     <a
@@ -246,13 +253,13 @@ const Page = () => {
                     {item.sell_price_min}
                   </td>
                   <td className="px-4 py-3 dark:text-white font-mono whitespace-nowrap text-right">
-                    {convertDateToMinutesSinceNow(item.sell_price_min_date)}
+                    {convertDateToMinutesSinceNow(item.sell_price_min_date) + ' minutes'}
                   </td>
                   <td className="px-4 py-3 dark:text-white font-mono whitespace-nowrap text-right">
                     {item.buy_price_max}
                   </td>
                   <td className="px-4 py-3 dark:text-white font-mono whitespace-nowrap text-right">
-                    {convertDateToMinutesSinceNow(item.buy_price_max_date)}
+                    {convertDateToMinutesSinceNow(item.buy_price_max_date) + ' minutes'}
                   </td>
                 </tr>
               ))}

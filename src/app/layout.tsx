@@ -27,7 +27,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             </div> */}
 
           <div className="bg-vc-border-gradient rounded-lg p-px shadow-lg shadow-black/20">
-            <div className="rounded-lg bg-gray-900 p-3.5 lg:p-6">{children}</div>
+            <div className="rounded-lg bg-gray-900 p-3.5 lg:p-6 text-neutral-300 text-base">
+              {children}
+            </div>
           </div>
         </div>
         {/* </div> */}

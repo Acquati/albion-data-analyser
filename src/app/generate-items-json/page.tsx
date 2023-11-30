@@ -18,6 +18,10 @@ const Page = () => {
       <p>Generate a JSON file with the items that are present in the game.</p>
       <Button onClick={fileGenerationResponse}>Generate File</Button>
       <p>Feedback: {responseText}</p>
+      <p>
+        Last "items_raw.json" download and "items.json" generated: Wed Nov 29 2023 23:14:09 GMT-0300
+        (Brasilia Standard Time)
+      </p>
     </div>
   )
 }
