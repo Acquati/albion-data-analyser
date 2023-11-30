@@ -16,23 +16,30 @@ import SortNameToggle from '@/components/table/sort-name-toggle'
 import SortDealValueToggle from '@/components/table/sort-deal-value-toggle'
 import SortReturnOfInvestmentToggle from '@/components/table/sort-deal-value-toggle copy'
 import convertDateToMinutesSinceNow from '@/lib/convertDateToMinutesSinceNow'
+import filterUniqueNamesByTier from '@/lib/filterUniqueNamesByTier'
 
 const Page = () => {
-  const [blackMarketResponseFeedback, setBlackMarketResponseFeedback] = useState(
+  const [blackMarketResponseFeedback, setBlackMarketResponseFeedback] = useState<string>(
     'Waiting for "Request Black Market Items" button to be pressed.'
   )
-  const [cityResponseFeedback, setCityResponseFeedback] = useState(
+  const [cityResponseFeedback, setCityResponseFeedback] = useState<string>(
     'Waiting for "Request Black Market Items" button to be pressed.'
   )
-  const [dealValueMin, setDealValueMin] = useState(3000)
-  const [cityPriceMax, setCityPriceMax] = useState(500000)
+  const [dealValueMin, setDealValueMin] = useState<number>(3000)
+  const [cityPriceMax, setCityPriceMax] = useState<number>(500000)
+  const [tierList, setTierList] = useState<string[]>(['T5'])
+  const [cityList, setCityList] = useState<string[]>(['Caerleon'])
 
   const [completeBestDeals, setCompleteBestDeals] = useState<CompleteMarketItem[] | null>(null)
 
   const handleClick = async () => {
     setCityResponseFeedback('Waiting for Black Market Items to be fetched.')
 
-    const uniqueNames = getItemsUniqueNames(items)
+    let uniqueNames = getItemsUniqueNames(items)
+
+    if (tierList.length !== 0) {
+      uniqueNames = filterUniqueNamesByTier(uniqueNames, tierList)
+    }
 
     const blackMarketRequestList = generateApiRequests(
       uniqueNames,
@@ -59,7 +66,7 @@ const Page = () => {
 
     const cityRequestList = generateApiRequests(
       blackMarketUniqueNames,
-      ['Caerleon'],
+      cityList,
       setCityResponseFeedback
     )
 
@@ -199,9 +206,6 @@ const Page = () => {
                   Sell Price Min
                 </SortSellPriceMinToggle>
               </th>
-              <th scope="col" className="px-4 py-3 whitespace-nowrap text-right">
-                Sell Price Date
-              </th>
               <th scope="col" className="px-4 py-3 whitespace-nowrap">
                 <SortBuyPriceMaxToggle
                   data={completeBestDeals}
@@ -210,6 +214,9 @@ const Page = () => {
                 >
                   Buy Price Max
                 </SortBuyPriceMaxToggle>
+              </th>
+              <th scope="col" className="px-4 py-3 whitespace-nowrap text-right">
+                Sell Price Date
               </th>
               <th scope="col" className="px-4 py-3 whitespace-nowrap text-right">
                 Buy Price Date
@@ -253,10 +260,10 @@ const Page = () => {
                     {item.sell_price_min}
                   </td>
                   <td className="px-4 py-3 dark:text-white font-mono whitespace-nowrap text-right">
-                    {convertDateToMinutesSinceNow(item.sell_price_min_date) + ' minutes'}
+                    {item.buy_price_max}
                   </td>
                   <td className="px-4 py-3 dark:text-white font-mono whitespace-nowrap text-right">
-                    {item.buy_price_max}
+                    {convertDateToMinutesSinceNow(item.sell_price_min_date) + ' minutes'}
                   </td>
                   <td className="px-4 py-3 dark:text-white font-mono whitespace-nowrap text-right">
                     {convertDateToMinutesSinceNow(item.buy_price_max_date) + ' minutes'}
